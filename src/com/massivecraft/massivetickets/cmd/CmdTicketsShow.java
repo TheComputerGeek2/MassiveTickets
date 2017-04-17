@@ -82,6 +82,7 @@ public class CmdTicketsShow extends MassiveTicketsCommand
 		Mson buttonDone = getButtonFunctional(BUTTON_DONE, Perm.DONE, Perm.DONE_OTHER, mplayer, CmdTickets.get().cmdTicketsDone, true, false);
 		Mson buttonYield = getButtonFunctional(BUTTON_YIELD, Perm.YIELD, Perm.YIELD_OTHER, mplayer, CmdTickets.get().cmdTicketsYield, true, false);
 		Mson buttonTeleport = getButtonFunctional(BUTTON_TELEPORT, Perm.TELEPORT, null, mplayer, CmdTickets.get().cmdTicketsTeleport, true, false);
+		Mson buttonNote = Mson.EMPTY;
 		
 		// Check if moderated and change desc & buttons
 		String pickedByDesc = Txt.parse("<silver><em>noone yet");
@@ -104,9 +105,23 @@ public class CmdTicketsShow extends MassiveTicketsCommand
 			buttonTeleport = buttonTeleport.color(ChatColor.GRAY).tooltipParse("<b>You cannot teleport to yourself.").event(false, MsonEvent.suggest(""));
 		}
 		
-		// Send moderator info and buttons
+		// Send moderator info
 		msg("<k>Picked By: <v>%s", pickedByDesc);
-		message(mson(buttonUpdate, buttonPick, SPACE, buttonYield, SPACE, buttonDone, SPACE, buttonTeleport));
+		
+		// If the sender has permission to see notes
+		if (Perm.NOTE.has(sender))
+		{
+			// Only make a note button to display if they can use it
+			// Since this is mostly a staff only tool.
+			buttonNote = getButtonFunctional(BUTTON_NOTE, Perm.NOTE, null, mplayer, CmdTickets.get().cmdTicketsNote, true, true);
+			
+			// Send staff's ticket note
+			String note = mplayer.hasNote() ? mplayer.getNote() : Txt.parse("<silver><em>no staff notes");
+			msg("<k>Staff Note: <v>%s", note);
+		}
+		
+		// Send buttons
+		message(mson(buttonUpdate, buttonPick, SPACE, buttonYield, SPACE, buttonDone, SPACE, buttonTeleport, SPACE, buttonNote));
 		
 		// React
 		MConf.get().getShowReaction().run(msender.getId(), mplayer.getId());

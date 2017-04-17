@@ -68,6 +68,9 @@ public class MConf extends Entity<MConf>
 	public List<String> aliasesInnerTicketsVersion = MUtil.list("version");
 	public List<String> aliasesOuterTicketsVersion = new ArrayList<>();
 	
+	public List<String> aliasesInnerTicketsNote = MUtil.list("note");
+	public List<String> aliasesOuterTicketsNote = new ArrayList<>();
+	
 	// Format
 	private String prefix = "<pink><T> ";
 	public String getPrefix() { return this.prefix; }

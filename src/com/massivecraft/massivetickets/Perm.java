@@ -24,9 +24,10 @@ public enum Perm implements Identified
 	MODLIST,
 	WORKING,
 	CHEAT,
-	VERSION,
 	TELEPORT,
+	NOTE,
 	CONFIG,
+	VERSION,
 	
 	// END OF LIST
 	;

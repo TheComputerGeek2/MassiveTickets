@@ -22,6 +22,7 @@ public abstract class MassiveTicketsCommand extends MassiveCommand
 	public static final Mson BUTTON_LIST = getButton("List");
 	public static final Mson BUTTON_STOP = getButton("Stop");
 	public static final Mson BUTTON_TELEPORT = getButton("Teleport");
+	public static final Mson BUTTON_NOTE = getButton("Note");
 	
 	public static Mson getButton(String name) { return Mson.mson("[" + name + "]").color(ChatColor.AQUA); }
 	

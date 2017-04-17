@@ -13,6 +13,7 @@ import com.massivecraft.massivetickets.cmd.CmdTicketsDone;
 import com.massivecraft.massivetickets.cmd.CmdTicketsHighscore;
 import com.massivecraft.massivetickets.cmd.CmdTicketsList;
 import com.massivecraft.massivetickets.cmd.CmdTicketsModlist;
+import com.massivecraft.massivetickets.cmd.CmdTicketsNote;
 import com.massivecraft.massivetickets.cmd.CmdTicketsPick;
 import com.massivecraft.massivetickets.cmd.CmdTicketsShow;
 import com.massivecraft.massivetickets.cmd.CmdTicketsTeleport;
@@ -37,6 +38,7 @@ import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import static com.massivecraft.massivecore.mson.Mson.SPACE;
 import static com.massivecraft.massivecore.mson.Mson.mson;
 
 public class MassiveTickets extends MassivePlugin
@@ -85,6 +87,7 @@ public class MassiveTickets extends MassivePlugin
 			CmdTicketsWorking.class,
 			CmdTicketsTeleport.class,
 			CmdTicketsCheat.class,
+			CmdTicketsNote.class,
 			CmdTicketsVersion.class
 		);
 	}
@@ -107,8 +110,8 @@ public class MassiveTickets extends MassivePlugin
 	// BUMP
 	// -------------------------------------------- //
 	
-	private static Mson TICKETS = Mson.SPACE.add(mson("tickets").color(ChatColor.LIGHT_PURPLE)).add(Mson.SPACE);
-	private static Mson MODERATORS = Mson.SPACE.add(mson("moderators").color(ChatColor.LIGHT_PURPLE)).add(Mson.SPACE);
+	private static Mson TICKETS = SPACE.add(mson("tickets").color(ChatColor.LIGHT_PURPLE)).add(SPACE);
+	private static Mson MODERATORS = SPACE.add(mson("moderators").color(ChatColor.LIGHT_PURPLE)).add(SPACE);
 	
 	public static Mson createBumpMessage()
 	{

@@ -16,6 +16,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static com.massivecraft.massivecore.mson.Mson.EMPTY;
+import static com.massivecraft.massivecore.mson.Mson.SPACE;
 import static com.massivecraft.massivecore.mson.Mson.mson;
 
 public class MPlayer extends SenderEntity<MPlayer>
@@ -39,6 +41,7 @@ public class MPlayer extends SenderEntity<MPlayer>
 		this.setMessage(that.getMessage());
 		this.setMillis(that.getMillis());
 		this.setModeratorId(that.getModeratorId());
+		this.setNote(that.getNote());
 		this.setWorking(that.isWorking());
 		this.setCount(that.getCount());
 		this.setTotalCount(that.getTotalCount());
@@ -52,6 +55,7 @@ public class MPlayer extends SenderEntity<MPlayer>
 		if (this.hasMessage()) return false;
 		if (this.hasMillis()) return false;
 		if (this.hasModeratorId()) return false;
+		if (this.hasNote()) return false;
 		if (this.isWorking()) return false;
 		if (this.hasCount()) return false;	
 		
@@ -75,6 +79,9 @@ public class MPlayer extends SenderEntity<MPlayer>
 	// Did a moderator pick this ticket?
 	// In such case this is the id/playername of that moderator.
 	private String moderatorId = null;
+	
+	// For staff to make quick notes about a player, such as if they are afk
+	private String note = null;
 	
 	// Is this player a working moderator?
 	// The default is false. One must opt in for game management.
@@ -151,6 +158,11 @@ public class MPlayer extends SenderEntity<MPlayer>
 		// Mark as changed
 		this.changed();
 	}
+	
+	// FIELD: NOTE
+	public String getNote() { return this.note; }
+	public boolean hasNote() { return this.note != null; }
+	public void setNote(String note) { this.note = note; this.changed(); }
 	
 	// FIELD: WORKING
 	public boolean isWorking() { return this.working != null; }
@@ -286,13 +298,27 @@ public class MPlayer extends SenderEntity<MPlayer>
 	{
 		return mson(
 			"#",
-			Mson.SPACE,
+			SPACE,
 			this.getDisplayNameMson(watcherObject),
-			Mson.SPACE,
-			this.getListLineExcerpt(watcherObject)
+			SPACE,
+			this.getListLineExcerpt(watcherObject),
+			this.getNoteIndicator()
 		)
 		.command(CmdTickets.get().cmdTicketsShow, this.getName())
 		.color(this.hasModeratorId() ? ChatColor.GREEN : ChatColor.RED);
+	}
+	
+	// For making getListLine read a bit more cleanly
+	private Mson getNoteIndicator()
+	{
+		if (!this.hasNote()) return EMPTY;
+		
+		return mson(
+			SPACE,
+			mson("*")
+			.tooltip(Txt.parse("<lime>Has a note!"))
+			.color(ChatColor.GREEN)
+		);
 	}
 	
 	public Mson getListLineExcerpt(Object watcherObject)
@@ -367,6 +393,7 @@ public class MPlayer extends SenderEntity<MPlayer>
 		this.setMessage(null);
 		this.setMillis(null);
 		this.setModeratorId(null);
+		this.setNote(null);
 	}
 	
 	// -------------------------------------------- //
