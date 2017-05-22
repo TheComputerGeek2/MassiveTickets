@@ -30,7 +30,8 @@ public class CmdTickets extends MassiveTicketsCommand
 	public CmdTicketsWorking cmdTicketsWorking = new CmdTicketsWorking();
 	public CmdTicketsTeleport cmdTicketsTeleport = new CmdTicketsTeleport();
 	public CmdTicketsCheat cmdTicketsCheat = new CmdTicketsCheat();
-	public CmdTicketsConfig cmdMassiveTicketsConfig = new CmdTicketsConfig();
+	public CmdTicketsPreference cmdTicketsPreference = new CmdTicketsPreference();
+	public CmdTicketsConfig cmdTicketsConfig = new CmdTicketsConfig();
 	public CmdTicketsVersion cmdTicketsVersion = new CmdTicketsVersion();
 	
 	// -------------------------------------------- //
@@ -51,7 +52,8 @@ public class CmdTickets extends MassiveTicketsCommand
 		this.addChild(this.cmdTicketsWorking);
 		this.addChild(this.cmdTicketsTeleport);
 		this.addChild(this.cmdTicketsCheat);
-		this.addChild(this.cmdMassiveTicketsConfig);
+		this.addChild(this.cmdTicketsPreference);
+		this.addChild(this.cmdTicketsConfig);
 		this.addChild(this.cmdTicketsVersion);
 		
 		// Requirements

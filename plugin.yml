@@ -24,8 +24,20 @@ permissions:
   massivetickets.working: {description: set if you are working, default: false}
   massivetickets.teleport: {description: teleport to a player, default: false}
   massivetickets.cheat: {description: give a point 4NORaisins, default: false}
-  massivetickets.version: {description: show plugin version, default: false}
+  massivetickets.preference: {description: tweak your moderating experience, default: false}
+  massivetickets.preference.create: {description: create new preference profiles, default: false}
+  massivetickets.preference.delete: {description: delete preference profiles, default: false}
+  massivetickets.preference.edit: {description: edit preference profiles, default: false}
+  massivetickets.preference.edit.name: {description: edit the name of preference profiles, default: false}
+  massivetickets.preference.edit.lock: {description: lock or unlock preference profiles, default: false}
+  massivetickets.preference.edit.authors: {description: edit the listed authors of preference profiles, default: false}
+  massivetickets.preference.edit.reaction.create: {description: edit preference profile ticket create reaction, default: false}
+  massivetickets.preference.edit.reaction.pick: {description: edit preference profile ticket pick reaction, default: false}
+  massivetickets.preference.edit.used: {description: select preference profiles, default: false}
+  massivetickets.preference.list: {description: list preference profiles, default: false}
+  massivetickets.preference.test.reaction.create: {description: test your ticket create reaction, default: false}
   massivetickets.config: {description: edit MassiveTickets config, default: false}
+  massivetickets.version: {description: show plugin version, default: false}
 # -------------------------------------------- #
 # STAR NOTATION
 # -------------------------------------------- #
@@ -46,8 +58,20 @@ permissions:
       massivetickets.working: true
       massivetickets.teleport: true
       massivetickets.cheat: true
-      massivetickets.version: true
+      massivetickets.preference: true
+      massivetickets.preference.create: true
+      massivetickets.preference.delete: true
+      massivetickets.preference.edit: true
+      massivetickets.preference.edit.name: true
+      massivetickets.preference.edit.lock: true
+      massivetickets.preference.edit.authors: true
+      massivetickets.preference.edit.reaction.create: true
+      massivetickets.preference.edit.reaction.pick: true
+      massivetickets.preference.edit.used: true
+      massivetickets.preference.list: true
+      massivetickets.preference.test.reaction.create: true
       massivetickets.config: true
+      massivetickets.version: true
 # -------------------------------------------- #
 # KITS
 # -------------------------------------------- #
@@ -59,11 +83,20 @@ permissions:
     default: false
     children:
       massivetickets.kit.rank2: true
+      massivetickets.preference.edit.lock: true
       massivetickets.config: true
   massivetickets.kit.rank2:
     default: false
     children:
+      massivetickets.kit.rank1: true
       massivetickets.yield.other: true
+      massivetickets.preference.create: true
+      massivetickets.preference.delete: true
+      massivetickets.preference.edit.name: true
+      massivetickets.preference.edit.authors: true
+      massivetickets.preference.edit.reaction.create: true
+      massivetickets.preference.edit.reaction.pick: true
+      massivetickets.preference.test.reaction.create: true
   massivetickets.kit.rank1:
     default: false
     children:
@@ -76,6 +109,10 @@ permissions:
       massivetickets.highscore: true
       massivetickets.working: true
       massivetickets.teleport: true
+      massivetickets.preference: true
+      massivetickets.preference.edit: true
+      massivetickets.preference.edit.used: true
+      massivetickets.preference.list: true
   massivetickets.kit.rank0:
     default: false
     children:

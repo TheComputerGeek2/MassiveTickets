@@ -14,6 +14,7 @@ import com.massivecraft.massivetickets.cmd.CmdTicketsHighscore;
 import com.massivecraft.massivetickets.cmd.CmdTicketsList;
 import com.massivecraft.massivetickets.cmd.CmdTicketsModlist;
 import com.massivecraft.massivetickets.cmd.CmdTicketsPick;
+import com.massivecraft.massivetickets.cmd.CmdTicketsPreference;
 import com.massivecraft.massivetickets.cmd.CmdTicketsShow;
 import com.massivecraft.massivetickets.cmd.CmdTicketsTeleport;
 import com.massivecraft.massivetickets.cmd.CmdTicketsVersion;
@@ -27,6 +28,7 @@ import com.massivecraft.massivetickets.engine.TaskBump;
 import com.massivecraft.massivetickets.entity.MConf;
 import com.massivecraft.massivetickets.entity.MConfColl;
 import com.massivecraft.massivetickets.entity.MPlayerColl;
+import com.massivecraft.massivetickets.entity.PreferenceProfileColl;
 import com.massivecraft.massivetickets.predicate.PredicateIsModerator;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -62,6 +64,7 @@ public class MassiveTickets extends MassivePlugin
 		// Activate
 		this.activate(
 			// Coll
+			PreferenceProfileColl.class,
 			MConfColl.class,
 			MPlayerColl.class,
 				
@@ -85,6 +88,7 @@ public class MassiveTickets extends MassivePlugin
 			CmdTicketsWorking.class,
 			CmdTicketsTeleport.class,
 			CmdTicketsCheat.class,
+			CmdTicketsPreference.class,
 			CmdTicketsVersion.class
 		);
 	}

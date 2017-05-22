@@ -71,7 +71,7 @@ public class CmdTicketsPick extends MassiveTicketsCommand
 		}
 		
 		// Are you trying to pick your own ticket?
-		if (ticket == msender) throw new MassiveException().setMessage("<bad>You can not pick your own ticket.");
+		if (ticket == msender) throw new MassiveException().setMsg("<bad>You can not pick your own ticket.");
 		
 		// Already picked?
 		MPlayer moderator = ticket.getModerator();
@@ -117,6 +117,7 @@ public class CmdTicketsPick extends MassiveTicketsCommand
 		
 		// React
 		MConf.get().getPickReaction().run(msender.getId(), ticket.getId());
+		if (msender.hasUsedPreferenceProfile()) msender.getPreferenceProfileUsed().runReactionPick(ticket, msender);
 	}
 	
 }

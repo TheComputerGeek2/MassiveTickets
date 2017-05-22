@@ -42,7 +42,8 @@ public class MPlayer extends SenderEntity<MPlayer>
 		this.setWorking(that.isWorking());
 		this.setCount(that.getCount());
 		this.setTotalCount(that.getTotalCount());
-				
+		this.setPreferenceProfileUsed(that.getPreferenceProfileUsed());
+		
 		return this;
 	}
 	
@@ -53,7 +54,8 @@ public class MPlayer extends SenderEntity<MPlayer>
 		if (this.hasMillis()) return false;
 		if (this.hasModeratorId()) return false;
 		if (this.isWorking()) return false;
-		if (this.hasCount()) return false;	
+		if (this.hasCount()) return false;
+		if (this.hasUsedPreferenceProfile()) return false;
 		
 		return true;
 	}
@@ -93,6 +95,9 @@ public class MPlayer extends SenderEntity<MPlayer>
 	private Map<Integer, Map<Integer, Integer>> count = null;
 
 	private int totalCount = 0;
+	
+	private String preferenceProfileUsed = null;
+	private transient PreferenceProfile profileCache = null;
 	
 	// -------------------------------------------- //
 	// FIELDS: LOW
@@ -212,9 +217,51 @@ public class MPlayer extends SenderEntity<MPlayer>
 			ret.put(key, value);
 		}
 		
-		if (map.size() == 0) return null;
+		if (map.isEmpty()) return null;
 		return ret;
 	}
+	
+	// FIELD: PREFERENCE PROFILE USED
+	public PreferenceProfile getPreferenceProfileUsed()
+	{
+		if (this.preferenceProfileUsed == null) return null;
+		
+		// Check the cache
+		if (this.isPreferenceProfileCacheValid()) return this.profileCache;
+		
+		PreferenceProfile usedProfile = PreferenceProfileColl.get().get(this.preferenceProfileUsed);
+		
+		// Update the cache
+		this.profileCache = usedProfile;
+		
+		// Return
+		return usedProfile;
+	}
+	
+	private boolean isPreferenceProfileCacheValid()
+	{
+		if (this.profileCache == null) return false;
+		if (!this.profileCache.getId().equals(this.preferenceProfileUsed)) return false;
+		if (!this.profileCache.isLive()) return false;
+		return true;
+	}
+	
+	public void setPreferenceProfileUsed(PreferenceProfile preferenceProfile)
+	{
+		String id = preferenceProfile == null ? null : preferenceProfile.getId();
+		
+		// Detect Nochange
+		if (MUtil.equals(this.preferenceProfileUsed, id)) return;
+		
+		// Apply
+		this.preferenceProfileUsed = id;
+		this.profileCache = preferenceProfile;
+		
+		// Mark as changed
+		this.changed();
+	}
+	
+	public boolean hasUsedPreferenceProfile() { return this.getPreferenceProfileUsed() != null; }
 	
 	// -------------------------------------------- //
 	// FIELDS: MEDIUM

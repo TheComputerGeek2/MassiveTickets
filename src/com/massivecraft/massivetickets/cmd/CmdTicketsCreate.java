@@ -72,6 +72,12 @@ public class CmdTicketsCreate extends MassiveTicketsCommand
 		else
 		{
 			MassiveTickets.alertModeratorsMessage(this.getCreatedMson(msender, verb, message));
+			
+			// See if the moderators have personal reactions
+			for (MPlayer moderator: MPlayerColl.get().getAllCurrentlyWorking())
+			{
+				if (moderator.hasUsedPreferenceProfile()) moderator.getPreferenceProfileUsed().runReactionCreate(msender, moderator);
+			}
 		}
 		
 		// Inform Creator

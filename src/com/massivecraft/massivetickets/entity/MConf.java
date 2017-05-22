@@ -62,6 +62,9 @@ public class MConf extends Entity<MConf>
 	public List<String> aliasesInnerTicketsCheat = MUtil.list("cheat");
 	public List<String> aliasesOuterTicketsCheat = new ArrayList<>();
 	
+	public List<String> aliasesInnerTicketsPreferences = MUtil.list("prefs", "preferences");
+	public List<String> aliasesOuterTicketsPreferences = new ArrayList<>();
+	
 	public List<String> aliasesInnerTicketsTeleport = MUtil.list("tp", "teleport");
 	public List<String> aliasesOuterTicketsTeleport = new ArrayList<>();
 	
@@ -151,6 +154,14 @@ public class MConf extends Entity<MConf>
 	public Reaction getYieldReaction() { return this.yieldReaction; }
 	public void setYieldReaction(Reaction yieldReaction) { this.yieldReaction = yieldReaction; this.changed(); }
 
+	private Integer moderatorPreferenceProfileNameLengthMin = 1;
+	public Integer getModeratorPreferenceProfileNameLengthMin() { return this.moderatorPreferenceProfileNameLengthMin; }
+	public void setModeratorPreferenceProfileNameLengthMin(Integer min) { this.moderatorPreferenceProfileNameLengthMin = min; this.changed(); }
+	
+	private Integer moderatorPreferenceProfileNameLengthMax = null;
+	public Integer getModeratorPreferenceProfileNameLengthMax() { return this.moderatorPreferenceProfileNameLengthMax; }
+	public void setModeratorPreferenceProfileNameLengthMax(Integer max) { this.moderatorPreferenceProfileNameLengthMax = max; this.changed(); }
+	
 	// Rewards
 	public int ticketsPerReward = 5;
 
